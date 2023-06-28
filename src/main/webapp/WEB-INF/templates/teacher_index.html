@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教师首页</title>
+    <link rel="stylesheet" th:href="@{/static/css/student_index.css}">
+    <link rel="stylesheet" th:href="@{/static/css/fontawesome-free-6.2.1-web/css/all.css}">
+    <link rel="stylesheet" th:href="@{/static/css/teacher_index.css}">
+</head>
+<body>
+<div class="top-bar-wrapper">
+    <div class="touxiang">
+        <img th:src="@{/static/css/img/头像.png}" width="40px">
+        <p>是小蓝捏<i class="fa fa-angle-down" aria-hidden="true"></i></p>
+        <div class="pull-down-list">
+            <a href="#">个人信息</a>
+            <a th:href="@{/index}">退出登录</a>
+        </div>
+    </div>
+</div>
+<main>
+    <div class="choose_role">
+        <p>亲爱的老师，欢迎登录在在线考试管理系统！</p>
+        <p>请选择您的角色：</p>
+        <div class="choose">
+            <div class="proposition">
+                <a th:href="@{/proposition_teacher_index}"><input type="button" value="命题老师"></a>
+            </div>
+            <div class="correct">
+                <a th:href="@{/correction_teacher_index}"><input type="button" value="批改老师"></a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

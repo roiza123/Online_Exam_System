@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.ExamMapper">
+
+    <!--    Exam findExam(@Param("eId") String eId);-->
+    <select id="findExam" resultType="com.example.system.pojo.Exam">
+        select * from exam where e_id = #{eId}
+    </select>
+
+    <!--    void addTitle1(@Param("eId") String eId, @Param("tId") String tId);-->
+    <insert id="addTitle1">
+        insert into exam (e_id,t_id) values (#{eId},#{tId})
+    </insert>
+
+    <!--    void addTitle2(@Param("eSubject") String eSubject, @Param("eBegin") String eBegin, @Param("eEnd") String eEnd);-->
+    <update id="addTitle2">
+        update exam set e_subject=#{eSubject}, e_begin = #{eBegin}, e_end = #{eEnd} where e_id =#{eId}
+    </update>
+</mapper>

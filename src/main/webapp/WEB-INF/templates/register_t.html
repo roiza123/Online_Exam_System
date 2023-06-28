@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>教师注册页面</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-image: url("/Online_Exam_System/static/css/img/背景.jpg");
+            background-position: top;
+            background-size: 110%;
+            background-repeat: no-repeat;
+        }
+
+        form {
+            width: 620px;
+            height: 370px;
+            background-color: rgba(255, 255, 255, 0.7);
+            margin: 10% auto;
+            border-radius: 2%;
+            position: relative;
+        }
+
+        .tiptext {
+
+            position: absolute;
+        }
+
+        p {
+            margin: 10px 214px;
+            font-size: 24px;
+            font-family: 微软雅黑;
+        }
+
+        tbody {
+            margin: 10% auto;
+            height: 96%;
+            width: 100%;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        tr {
+            border-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/registerTeacher}" method="post">
+    <div class="tiptext">
+        <p>请填写下列信息：</p>
+    </div>
+    <table>
+        <tr>
+            <td>工号：</td>
+            <td>
+                <input type="text" name="t_id">
+            </td>
+        </tr>
+        <tr>
+            <td>姓名：</td>
+            <td>
+                <input type="text" name="t_name">
+            </td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td>
+                <input type="password" name="t_password">
+            </td>
+        </tr>
+        <tr>
+            <td>联系电话：</td>
+            <td>
+                <input type="text" name="t_phone">
+            </td>
+        </tr>
+        <tr>
+            <td>角色：</td>
+            <td>
+                <input type="radio" name="t_role" value="1">命题老师
+                <input type="radio" name="t_role" value="0">批改老师
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="注册">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

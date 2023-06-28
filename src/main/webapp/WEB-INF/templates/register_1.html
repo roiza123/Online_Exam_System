@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-image: url("/Online_Exam_System/static/css/img/背景.jpg");
+            background-position: top;
+            background-size: 110%;
+            background-repeat: no-repeat;
+        }
+
+        .login-box {
+            width: 500px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.7);
+            margin: 10% auto;
+            border-radius: 2%;
+            position: relative;
+        }
+
+        p{
+            width:35% ;
+            margin: 10px 32%;
+            font-weight: bold;
+            font-size: 28px;
+            position:absolute ;
+        }
+
+        .choose_role2>div{
+            float: left;
+        }
+
+        input{
+            height: 124px;
+            width: 180px;
+            background-color: dodgerblue;
+            border-color: white;
+            border-radius: 10px 10px;
+            text-decoration: none;
+            font-family: 微软雅黑;
+            font-size: 34px;
+            margin: 50% 35px;
+            float: left;
+        }
+
+        input:hover{
+            background-color: #355B94;
+        }
+
+    </style>
+</head>
+<body>
+<form th:action="@{/register}" method="post">
+    <div class="login-box">
+        <p>你的身份是：</p>
+        <div class="choose_role2">
+            <div class="student">
+                <a th:href="@{/register_s}"><input type="button" value="学生"></a>
+            </div>
+            <div class="teacher">
+                <a th:href="@{/register_t}"><input type="button" value="老师"></a>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

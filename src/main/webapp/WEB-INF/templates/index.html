@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线考试管理系统首页</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-image: url("/Online_Exam_System/static/css/img/背景.jpg");
+            background-position: top;
+            background-size: 110%;
+            background-repeat: no-repeat;
+        }
+
+        .login-box {
+            width: 500px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.7);
+            margin: 10% auto;
+            border-radius: 2%;
+        }
+
+        .login-box > p {
+            font-size: 32px;
+            font-style: oblique;
+            margin: 30px 20px 10px;
+            padding: 20px 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .login-text {
+            width: 80%;
+            height: 30%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .ul li {
+            margin: 20px 40px;
+        }
+
+        .login-text > a {
+            font-style: italic;
+            margin-right: 0%;
+            float: right;
+        }
+
+        a:hover {
+            color: cornflowerblue;
+        }
+
+        .login-type {
+            width: 80%;
+            height: 60%;
+            margin: 9% auto;
+            text-align: center;
+        }
+
+        .login-type input {
+            height: 40px;
+            width: 100px;
+            margin: -7px 30px;
+            border-radius: 2%;
+            border-style: none;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .login-type input:hover {
+            background-color: cornflowerblue;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        .forget{
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="index-page">
+    <div class="login-box">
+        <p>用户登录</p>
+        <form action="login" method="post">
+            <div class="login-text">
+                <ul>
+                    <li>
+                        <input type="radio" name="role" value="student">你是学生
+                        <input type="radio" name="role" value="teacher">你是老师
+                    </li>
+                    <li>
+                        <span>用户名：</span>
+                        <input type="text" name="user">
+                    </li>
+                    <li>
+                        <span>密&nbsp;&nbsp;&nbsp;码：</span>
+                        <input type="password" name="password">
+                    </li>
+                    <li>
+                        <input type="radio" name="ifCookie" value="yes">下次自动登录
+                    </li>
+                </ul>
+            </div>
+            <div class="login-type">
+                <input type="submit" value="登录">
+                <a th:href="@{/register}"><input type="button" value="注册"></a>
+            <div class="forget">
+                <a href="#">忘记用户名密码？</a>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

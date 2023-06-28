@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.StudentExamMapper">
+    <insert id="addStudentExam">
+        insert into student_exam(se_id,s_id,e_id) values(#{seId},#{sId},#{eId})
+    </insert>
+    <update id="updateExamScore">
+        update student_exam set choice_score = #{choiceScore} where se_id = #{seId}
+    </update>
+    <update id="updateStudentCorrentScore">
+        update student_exam set correct_score = #{score} where se_id = #{seId}
+    </update>
+
+    <!--    Collection<Exam> searchExam();-->
+    <select id="searchExam" resultType="com.example.system.pojo.Exam">
+        select * from exam
+    </select>
+
+    <!--    Collection<Title> getTitles(@Param("eId") String eId);-->
+    <select id="getTitles" resultType="com.example.system.pojo.Title">
+        select te_content,te_picture,te_id,te_type,te_answer,te_score
+        from title
+        where te_id in(
+        select te_id
+        from exam_title
+        where e_id=#{eId}
+        )
+    </select>
+
+    <select id="getAllStudents" resultType="com.example.system.pojo.StudentExam">
+        select * from student_exam where e_id=#{eId}
+    </select>
+    <select id="getStudentScore" resultType="java.lang.Integer">
+        select sum(sed_score) from student_exam_detail where se_id = #{seId}
+    </select>
+
+    <select id="findAllExamResult" resultType="com.example.system.model.StudentScoreListModel">
+        select student_exam.e_id,(choice_score + correct_score) eAllScore,e_subject, student_exam.s_id,student_exam.se_id
+        from student_exam,exam
+        where student_exam.e_id=exam.e_Id
+        and student_exam.s_id=#{sId}
+    </select>
+    <select id="geAllStudentScore" resultType="com.example.system.model.StudentScoreListModel">
+        select student_exam.e_id, (choice_score + correct_score) eAllScore, e_subject, student_exam.s_id,student_exam.se_id
+        from student_exam,
+        exam
+        where student_exam.e_id = exam.e_Id
+        and exam.e_subject = #{eSubject} order by  (choice_score + student_exam.correct_score) desc
+    </select>
+    <select id="getOneExamTitlesDetail" resultType="com.example.system.model.StudentExamAllDetailModel">
+        select te_content,te_picture,te_score,sed_answer,sed_score,te_answer,title.te_id
+        from title,student_exam_detail
+        where student_exam_detail.te_id=title.te_id and
+        se_id=#{seId}
+    </select>
+</mapper>

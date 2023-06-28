@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.TeacherMapper">
+    <!--boolean insertTeacher(String tId,String tName,String tPassword,String tPhone,Integer tRole);-->
+    <insert id="insertTeacher">
+        insert into teacher(t_id,t_name,t_password,t_phone,t_role)
+        values(#{tId},#{tName},#{tPassword},#{tPhone},#{tRole})
+    </insert>
+    <select id="ifRight" resultType="com.example.system.pojo.Teacher">
+        select * from teacher where t_id = #{username} and t_password = #{password}
+    </select>
+    <select id="getTeacher" resultType="com.example.system.pojo.Teacher">
+        select * from teacher where t_id=#{tId}
+    </select>
+    <select id="searchExam" resultType="com.example.system.pojo.Exam">
+        select * from Exam
+    </select>
+</mapper>

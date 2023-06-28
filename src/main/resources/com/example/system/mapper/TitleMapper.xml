@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.TitleMapper">
+
+    <!-- boolean insertTitles(String teId, String tId, String teContent, String tePicture, String teType, String teAnswer, Integer teScore);-->
+    <insert id="insertTitles">
+        insert into title(te_id,t_id,te_content,te_picture,te_type,te_answer,te_score,if_delete)
+        values(#{teId},#{tId},#{teContent},#{tePicture},#{teType},#{teAnswer},#{teScore},#{ifDelete})
+    </insert>
+
+    <!--    void updateOne(@Param("title") Title title);-->
+    <update id="updateOne">
+        update title set te_content=#{teContent},te_picture=#{tePicture},te_type=#{teType},te_answer=#{teAnswer},te_score=#{teScore}
+        where te_id = #{teId}
+    </update>
+
+    <!--    deleteTitle(String te_id);-->
+    <delete id="deleteTitle">
+        delete from title where te_id=#{teId}
+    </delete>
+
+    <!--    Title getTitle(String teId);-->
+    <select id="getTitle" resultType="com.example.system.pojo.Title">
+        select * from title where te_id=#{teId}
+    </select>
+
+    <!--    Collection<Title> getAllTitles();-->
+    <select id="getAllTitles" resultType="com.example.system.pojo.Title">
+        select * from title
+    </select>
+
+    <!--    Collection<Title> getTitles(String te_content);-->
+    <select id="getTitles" resultType="com.example.system.pojo.Title">
+        select * from title where te_content like concat('%',#{teContent},'%')
+    </select>
+
+    <!--    Title getOneTitle(@Param("te_id") String te_id);-->
+    <select id="getOneTitle" resultType="com.example.system.pojo.Title">
+        select * from title where te_id =#{teId}
+    </select>
+</mapper>

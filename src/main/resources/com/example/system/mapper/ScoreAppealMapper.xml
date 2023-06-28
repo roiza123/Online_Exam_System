@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.ScoreAppealMapper">
+    <insert id="addApeal">
+        insert into score_appeal (s_id,te_id,sa_content) values (#{sId},#{teId},#{saContent})
+    </insert>
+    <update id="addTeacherAppeal">
+        update score_appeal
+        set sa_result=#{saResult},sa_back_content= #{saBackContent}
+        where s_id=#{sId} and te_id=#{teId}
+    </update>
+    <update id="updateStudentScore">
+        update student_exam_detail
+        set sed_Score=#{sedScore}
+        where se_id =#{seId} and te_id=#{teId}
+    </update>
+
+    <select id="findAllAppeal" resultType="com.example.system.pojo.ScoreAppeal">
+        select * from score_appeal where s_id=#{sId}
+    </select>
+    <select id="findAllAppeals" resultType="com.example.system.pojo.ScoreAppeal">
+        select * from score_appeal where s_id=#{sId} and te_id=#{teId}
+    </select>
+    <select id="getAllNoReviewAppeal" resultType="com.example.system.pojo.ScoreAppeal">
+        select * from score_appeal where sa_back_content is  null and sa_result is null
+    </select>
+    <select id="getDetailAppeal" resultType="com.example.system.pojo.ScoreAppeal">
+        select * from score_appeal where s_id=#{sId} and te_id=#{teId}
+    </select>
+    <select id="findAllApealDetailsTeacher" resultType="com.example.system.model.ScoreExamTeacherDetailModel">
+        select score_appeal.s_id,
+        score_appeal.te_id,
+        sa_content,
+        sa_result,
+        sa_back_content,
+        student_exam.se_id,
+        te_content,
+        te_picture,
+        te_score,
+        sed_answer,
+        sed_score,
+        te_answer
+        from score_appeal,
+        student_exam,
+        student_exam_detail,
+        title
+        where score_appeal.s_id = student_exam.s_id
+        and score_appeal.te_id = student_exam_detail.te_id
+        and student_exam.se_id = student_exam_detail.se_id
+        and title.te_id=score_appeal.te_id
+        and score_appeal.s_id=#{sId} and title.te_id=#{teId} limit 1;
+    </select>
+
+
+</mapper>

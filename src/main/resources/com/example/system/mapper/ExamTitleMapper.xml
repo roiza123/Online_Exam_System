@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.ExamTitleMapper">
+
+
+<!--    void postId(@Param("eId") String eId);-->
+    <insert id="postId">
+        insert into exam_title(e_id) values (#{eId})
+    </insert>
+
+<!--    void addTitles(@Param("eId") String eId, @Param("teId") String teId);-->
+    <insert id="addTitles">
+        insert into exam_title(e_id,te_id) values (#{eId},#{teId})
+    </insert>
+
+<!--    Collection<Title> search(@Param("eId") String eId);-->
+    <select id="search" resultType="com.example.system.pojo.Title">
+        select title.te_id, te_content
+        from title,
+        exam_title
+        where exam_title.e_id = #{eId} and title.te_id = exam_title.te_id
+    </select>
+
+<!--    Collection<ExamTitle> searchone(@Param("eId") String eId, @Param("teId") String teId);-->
+    <select id="searchone" resultType="com.example.system.pojo.ExamTitle">
+        select * from exam_title where e_id=#{eId} and te_id=#{teId}
+    </select>
+
+
+</mapper>

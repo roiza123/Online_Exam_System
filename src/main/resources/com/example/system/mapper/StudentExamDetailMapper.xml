@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.StudentExamDetailMapper">
+    <insert id="addStudentExamDetail">
+        insert into student_exam_detail(se_id,te_id,sed_answer,sed_score) values(#{seId},#{teId},#{sedAnswer},#{sedScore})
+    </insert>
+    <update id="updateScore">
+        update student_exam_detail set sed_score = #{score} ,t_id = #{tId} where se_id = #{seId} and te_id = #{teId}
+    </update>
+
+    <select id="findAll" resultType="com.example.system.pojo.Title">
+        select title.te_id,te_type,te_answer,te_score from exam_title ,title where e_id=#{eId} and exam_title.te_id = title.te_id
+    </select>
+    <select id="getChoiceScore" resultType="com.example.system.pojo.StudentExamDetail">
+        select sed_score from student_exam_detail where se_id = #{seId}
+    </select>
+    <select id="getTitles" resultType="com.example.system.model.StudentExamNotChoiceModel">
+        select title.te_id,
+        te_content,
+        te_type,
+        te_answer,
+        te_score,
+        te_picture,
+        sed_answer,
+        sed_score,
+        student_exam_detail.se_id,
+        e_subject
+        from title,
+        student_exam_detail,
+        exam,
+        student_exam
+        where title.te_id = student_exam_detail.te_id
+        and exam.e_id = student_exam.e_id
+        and student_exam.se_id = student_exam_detail.se_id
+        and student_exam.se_id = #{seId}
+    </select>
+</mapper>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>命题老师主页</title>
+    <link rel="stylesheet" th:href="@{/static/css/student_index.css}">
+    <link rel="stylesheet" th:href="@{/static/css/pt_index.css}">
+    <link rel="stylesheet" th:href="@{/static/css/fontawesome-free-6.2.1-web/css/all.css}">
+</head>
+<body>
+<div class="top-bar-wrapper">
+    <div class="touxiang">
+        <img th:src="@{/static/css/img/头像.png}" width="40px">
+        <p th:text="${session.tName}"></p><i class="fa fa-angle-down" aria-hidden="true"></i>
+        <div class="pull-down-list">
+            <a href="#">个人信息</a>
+            <a th:href="@{/index}">退出登录</a>
+        </div>
+    </div>
+</div>
+<div class="choice-box">
+    <div class="left-choice-box">
+        <form th:action="@{/postId}" method="post">
+            输入该卷试卷编号：
+            <input type="text" name="e_id" th:value="${session.eId}">
+            <input type="submit" value="提交">
+        </form>
+        <p class="tip">
+            <i class="fa-solid fa-paperclip"></i> 请选择需要添加组卷的题目：
+        </p>
+        <table>
+            <tr>
+                <th>题目编号：</th>
+                <th class="test">题目内容：</th>
+            </tr>
+            <tr th:each="e:${session.examTitles}">
+                <th th:text="${e.teId}" style="font-weight: lighter"></th>
+                <th th:text="${e.teContent}" style="font-weight: lighter"></th>
+            </tr>
+            <tr>
+                <a th:href="@{/turntofinish1}"><input type="button" value="前往组卷"></a>
+            </tr>
+        </table>
+    </div>
+    <div class="right-choice-box">
+        <div class="search">
+            <span>查找的题目关键词为：</span>
+            <form th:action="@{/Titles/find}" method="get">
+                <i class="fa-solid fa-magnifying-glass"></i> <input type="text" size="20px" name="te_content">
+                <input type="submit" value="搜索">
+            </form>
+        </div>
+        <div class="add">
+            <a th:href="@{/addTitles}"><i class="fa-sharp fa-solid fa-plus"></i></a>
+        </div>
+        <div class="titles" id="app">
+            <table>
+                <tr>
+                    <th colspan="3">题库</th>
+                </tr>
+                <tr>
+                    <th>题目编号</th>
+                    <th>题目内容</th>
+                    <th>对应操作</th>
+                </tr>
+                <tr th:each="t : ${session.allTitles}">
+                    <th th:text="${t.teId}" style="font-weight: lighter"></th>
+                    <th th:text="${t.teContent}" style="font-weight: lighter"></th>
+                    <th>
+                        <a @click="delete()" th:href="@{'/Titles/delete/'+${t.teId}}"
+                           style="font-weight: lighter">删除</a>
+                        <a th:href="@{'/Title/'+${t.teId}}" style="font-weight: lighter">具体信息</a>
+                        <a th:href="@{'/ExamTitle/'+${t.teId}}" style="font-weight: lighter">加入试卷</a>
+                    </th>
+                </tr>
+            </table>
+            <form method="post">
+                <input type="hidden" name="_method" value="delete">
+            </form>
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>-->
+<!--<script type="text/javascript">-->
+<!--    var vue = new Vue({-->
+<!--        el: "#app",-->
+<!--        methods: {-->
+<!--            delete() {-->
+<!--                //获取form表单-->
+<!--                var form = document.getElementsByTagName("form")[0];-->
+<!--                //将超链接的href属性值赋值给form表单-->
+<!--                //event.target表示当前触发事件的标签-->
+<!--                form.action = event.target.href;-->
+<!--                //表单提交-->
+<!--                form.submit();-->
+<!--                //组织超链接的默认行为-->
+<!--                event.preventDefault();-->
+<!--            }-->
+<!--        }-->
+<!--    })-->
+<!--</script>-->
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>题目具体信息</title>
+    <link rel="stylesheet" th:href="@{/static/css/student_index.css}">
+    <link rel="stylesheet" th:href="@{/static/css/fontawesome-free-6.2.1-web/css/all.css}">
+    <style>
+        .bottle {
+            height: 600px;
+            width: 97%;
+            border-style: dotted;
+            border-color: #666666;
+            border-radius: 10px 10px;
+            margin: 20px 20px;
+        }
+
+        .bottle > p {
+            font-size: 24px;
+            font-family: 微软雅黑;
+            text-align: center;
+            vertical-align: center;
+            margin: 50px;
+        }
+
+        .bottle1 {
+            height: 100%;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        .turnback {
+            height: 100px;
+            width: 100px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="top-bar-wrapper">
+    <div class="touxiang">
+        <img th:src="@{/static/css/img/头像.png}" width="40px">
+        <p th:text="${session.tName}"></p><i class="fa fa-angle-down" aria-hidden="true"></i>
+        <div class="pull-down-list">
+            <a th:href="@{/proposition_teacher_index}">返回首页</a>
+            <a th:href="@{/index}">退出登录</a>
+        </div>
+    </div>
+</div>
+<div class="bottle">
+    <p>题目的详细信息为：</p>
+    <form th:action="@{/Titles/update}" method="post">
+        <div class="bottle1">
+            <table>
+                <tr>
+                    <td>题目编号：</td>
+                    <td>
+                        <input type="text" name="te_id" th:value="${title.teId}" readonly="readonly">
+                    </td>
+                </tr>
+                <tr>
+                    <td>题干内容：</td>
+                    <td>
+                        <textarea name="te_content" cols="30px" rows="10px" th:text="${title.teContent}"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>附件：</td>
+                    <td>
+                        <input type="text" name="te_picture" th:value="${title.tePicture}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>题目类型：</td>
+                    <td>
+                        <input type="text" name="te_type" th:value="${title.teType}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>参考答案：</td>
+                    <td>
+                        <textarea name="te_answer" cols="30px" rows="5px" th:text="${title.teAnswer}"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>题目分值：</td>
+                    <td>
+                        <input type="text" name="te_score" th:value="${title.teScore}">
+                    </td>
+                </tr>
+                <tr >
+                    <th colspan="2" style="margin: 10px auto">
+                        <input id="buttons-box" type="submit" name="提交修改" size="20px">
+                        <a th:href="@{/proposition_teacher_index}"><input type="button" value="返回首页"></a>
+                    </th>
+                </tr>
+            </table>
+            <div class="turnback">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

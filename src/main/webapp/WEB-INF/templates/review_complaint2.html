@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>判断申诉页面</title>
+    <link rel="stylesheet" th:href="@{/static/css/student_index.css}">
+    <link rel="stylesheet" th:href="@{/static/css/fontawesome-free-6.2.1-web/css/all.css}">
+    <style>
+        .bottle {
+            height: 600px;
+            width: 97%;
+            border-style: dotted;
+            border-color: #666666;
+            border-radius: 10px 10px;
+            margin: 20px 20px;
+        }
+
+        .bottle > p {
+            font-size: 24px;
+            font-family: 微软雅黑;
+            text-align: center;
+            vertical-align: center;
+            margin: 50px;
+        }
+        form{
+            height: 100%;
+            width: 30%;
+            margin: 61px auto;
+        }
+        }
+    </style>
+</head>
+<body>
+<div class="top-bar-wrapper">
+    <div class="touxiang">
+        <img th:src="@{/static/css/img/头像.png}" width="40px">
+        <p th:text="${session.tName}"></p><i class="fa fa-angle-down" aria-hidden="true"></i>
+        <div class="pull-down-list">
+            <a th:href="@{/correction_teacher_index}">返回首页</a>
+            <a th:href="@{/index}">退出登录</a>
+        </div>
+    </div>
+</div>
+<div class="bottle">
+    <form th:action="@{/reviewStudent1/}" method="post">
+        <table th:each="sac:${session.saca}">
+            <tr>
+                <td>
+                    学生学号:
+                </td>
+                <td>
+                    <p th:text="${sac.sId}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    题目编号：
+                </td>
+                <td>
+                    <p th:text="${sac.teId}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    反馈内容：
+                </td>
+                <td>
+                    <p th:text="${sac.saContent}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    题目内容：
+                </td>
+                <td>
+                    <p th:text="${sac.teContent}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    题目附件：
+                </td>
+                <td>
+                    <p th:text="${sac.tePicture}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    学生回答：
+                </td>
+                <td>
+                    <p th:text="${sac.sedAnswer}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    学生得分：
+                </td>
+                <td>
+                    <p th:text="${sac.sedScore}+'/'+${sac.teScore}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    标准答案：
+                </td>
+                <td>
+                    <p th:text="${sac.sedAnswer}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    申诉结果：
+                </td>
+                <td>
+                    <input type="radio" name="saResult" value="1">申诉成功
+                    <input type="radio" name="saResult" value="0">申诉失败
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    反馈内容
+                </td>
+                <td>
+                    <textarea name="saBackContent" rows="5px" cols="30px"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    修改成绩为：
+                </td>
+                <td>
+                    <input type="text" name="sedScore">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <input type="submit" value="反馈申诉">
+                </th>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

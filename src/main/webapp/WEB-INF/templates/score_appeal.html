@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>成绩申诉页面</title>
+    <link rel="stylesheet" th:href="@{/static/css/student_index.css}">
+    <link rel="stylesheet" th:href="@{/static/css/fontawesome-free-6.2.1-web/css/all.css}">
+    <style>
+        /*高度塌陷*/
+        .clearfix:before,
+        .clearfix::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .choice-box {
+            width: 100%;
+            height: 650px;
+        }
+
+        .left-choice-box {
+            float: left;
+            height: 96%;
+            width: 30%;
+            border-style: dotted;
+            border-color: #666666;
+            margin: 20px 10px;
+            border-radius: 10px 10px;
+            z-index: 9999;
+        }
+        .right-choice-box{
+            float: right;
+            width: 66%;
+            height: 93%;
+        }
+
+        .right-choice-top-box {
+            float: right;
+            width: 94%;
+            height:56%;
+            border-style: dotted;
+            border-color: #666666;
+            border-radius: 10px 10px;
+            margin: 20px 10px 20px 0px;
+        }
+
+        .right-choice-bottom-box {
+            float: right;
+            width: 94%;
+            height: 40%;
+            border-style: dotted;
+            border-color: #666666;
+            border-radius: 10px 10px;
+            margin: 20px 10px 20px 0px;
+        }
+
+        .right-choice-box > table {
+            margin: 20px auto;
+            height: 100%;
+            width: 50%;
+        }
+
+        table{
+            width: 50%;
+            margin: 20px auto;
+        }
+
+        tbody > td {
+            text-align: center;
+            margin-left: 20px;
+        }
+
+        tbody>tr{
+            line-height: 28px;
+        }
+    </style>
+</head>
+<body>
+<div class="top-bar-wrapper">
+    <div class="touxiang">
+        <img th:src="@{/static/css/img/头像.png}" width="40px">
+        <p th:text="${session.sName}"></p><i class="fa fa-angle-down" aria-hidden="true"></i>
+        <div class="pull-down-list">
+            <a th:href="@{/student_index}">返回首页</a>
+            <a th:href="@{/index}">退出登录</a>
+        </div>
+    </div>
+</div>
+<div class="choice-box">
+    <div class="left-choice-box">
+        <table>
+            <tr>
+                <th>题目编号</th>
+                <th>申诉进度</th>
+                <td>
+                    <a th:href="@{/turnToaddAppeal}"><input type="button" value="添加申诉"></a>
+                </td>
+            </tr>
+            <tr th:each="sa: ${session.sas}">
+                <th th:text="${sa.teId}" style="font-weight: lighter"></th>
+                <th>
+                    <a th:href="@{'/score_appeal/'+${sa.teId}}"><input type="button" value="查看详情"></a>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <div class="right-choice-box">
+        <div class="right-choice-top-box">
+                <table th:each="sas:${session.sasd}">
+                    <tr>
+                        <th colspan="2">申诉信息如下：</th>
+                    </tr>
+                    <tr>
+                        <td>题目编号：</td>
+                        <td>
+                            <p th:text="${sas.teId}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>申诉内容：</td>
+                        <td>
+                            <p th:text="${sas.saContent}"></p>
+                        </td>
+                    </tr>
+                </table>
+
+        </div>
+        <div class="right-choice-bottom-box">
+            <p style="margin: 15px">申诉结果如下：</p>
+            <table th:each="sas:${session.sasd}">
+                <tr>
+                    <td>申诉结果：</td>
+                    <td>
+                        <p th:text="${sas.saResult}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>具体情况：</td>
+                    <td>
+                        <p th:text="${sas.saBackContent}"></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

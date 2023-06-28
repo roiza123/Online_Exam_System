@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生主页</title>
+    <link rel="stylesheet" th:href="@{/static/css/student_index.css}">
+    <link rel="stylesheet" th:href="@{/static/css/fontawesome-free-6.2.1-web/css/all.css}">
+</head>
+<body>
+<div class="top-bar-wrapper">
+    <div class="touxiang">
+        <img th:src="@{/static/css/img/头像.png}" width="40px">
+        <p th:text="${session.sName}"></p><i class="fa fa-angle-down" aria-hidden="true"></i>
+        <div class="pull-down-list">
+            <a href="#">个人信息</a>
+            <a th:href="@{/index}">退出登录</a>
+        </div>
+    </div>
+</div>
+<main>
+    <!--左侧导航栏-->
+    <nav>
+        <div class="touxiang2">
+            <img th:src="@{/static/css/img/头像.png}" width="80px">
+            <span th:text="${session.sName}"></span>
+        </div>
+        <div class="function">
+            <ul>
+                <li><a th:href="@{/turnToExam1}"><i class="fa-solid fa-pen"></i> 进入考试</a></li>
+            </ul>
+            <ul>
+                <li><a th:href="@{/searchScore}"><i class="fa-solid fa-magnifying-glass"></i> 查询成绩</a></li>
+            </ul>
+            <ul>
+                <li><a th:href="@{/score_appeal}"><i class="fa-solid fa-user"></i></i> 成绩申诉</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--创建中间内容-->
+    <article>
+        <div class="text">
+            欢迎来到在线考试系统！
+        </div>
+    </article>
+</main>
+</body>
+</html>

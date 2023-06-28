@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.StudentMapper">
+    <!--        boolean insertStudent(String sId, String sName, String sPassword, Integer sGrade, String sMajor, Integer sClass, Integer sSex, String sCollege);
+    -->
+    <insert id="insertStudent">
+        insert into student(s_id,s_name,s_password,s_grade,s_major,s_class,s_sex,s_college) values
+        (#{sId},#{sName},#{sPassword},#{sGrade},#{sMajor},#{sClass},#{sSex},#{sCollege})
+    </insert>
+
+    <!--Student ifRight(String username,String password);-->
+    <select id="ifRight" resultType="com.example.system.pojo.Student">
+        select * from student where s_id = #{username} and s_password = #{password}
+    </select>
+
+    <select id="getStudent" resultType="com.example.system.pojo.Student">
+        select * from student where s_id = #{sId}
+    </select>
+</mapper>
